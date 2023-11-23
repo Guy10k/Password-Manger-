@@ -26,7 +26,7 @@ It Probebly contain some bugs and I hope in the future I could make it better an
   
 ![image](https://github.com/Guy10k/Password-Manger-/assets/29884018/59b27b46-abce-4933-a7e4-5880499cefaa)
 
-<p>Once you generate new password, It automatically copied to clipboard and you can just past it in order to use it at the host site.</p>
+<p>Once you generate new password, It automatically copied to clipboard and you can just paste it in order to use it at the host site you wish.</p>
   <p>Than you can optionally add some other notes for yourself. (I personally use it for another authentication code that sometime requires to store either)</p>
  <p>Than press  "Add New Password" bottun and get an indcator:</p>
  
@@ -45,15 +45,15 @@ It Probebly contain some bugs and I hope in the future I could make it better an
 
 ![image](https://github.com/Guy10k/Password-Manger-/assets/29884018/a188e94c-e034-4425-acab-dfd358073dc9)
 
-<p>Alternetavly you can get an overview of all of your passwords at once by clicking the "Show All Password" bottun:</p>
+<p>Alternetavly you can get an overview of all of your passwords at once by clicking the "Show All Passwords" button:</p>
 
 ![image](https://github.com/Guy10k/Password-Manger-/assets/29884018/98f49ff0-f1b0-4acf-9b21-c25426885483)
 
-<p>If you press a record in the table it will copy to clip board the password corosponded to this record and you can past it where ever you want to eazy accsess</p>
+<p>If you press a record in the table it will copy to clip board the password corosponded to this record and you can paste it where ever you want to eazy accsess</p>
 
 ![image](https://github.com/Guy10k/Password-Manger-/assets/29884018/8e0853d6-a743-4e25-8641-a1d817fc096d)
 
  <h4>3. Deleting A Record</h4>
-<p>once you click a spesific record in the tabel you can just head over and press "Delete Selected Record". Than a prompt will shows up and ask you if are you sure you want to delete this data: </p>
+<p>once you click a spesific record in the tabel you can just head over and press the "Delete Selected Record" button. Than a prompt will shows up and ask you if are you sure you want to delete this data: </p>
 
 ![image](https://github.com/Guy10k/Password-Manger-/assets/29884018/c1925ab9-486b-4250-ac14-f95b73287d11)
