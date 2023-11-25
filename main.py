@@ -166,9 +166,9 @@ class SearchFrame(ttk.Frame):
         self.rowconfigure((0, 1, 2, 3), weight=1, uniform='a')
         self.table = Table(self)
 
-        self.show_all_button = ttk.Button(self, text="Show All Password", command=self.show_all_Passwords,
+        self.show_all_button = ttk.Button(self, text="Show All Passwords", command=self.show_all_Passwords,
                                           style='TButton')
-        self.search_button = ttk.Button(self, text="Search For Password", command=self.search_password, style='TButton')
+        self.search_button = ttk.Button(self, text="Search For Passwords", command=self.search_password, style='TButton')
         self.user_search_entry = ttk.Entry(self, style='TEntry')
         self.host_search_entry = ttk.Entry(self, style='TEntry')
         self.user_search_label = ttk.Label(self, text="User Name:", style='TLabel')
