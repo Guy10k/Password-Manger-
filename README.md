@@ -28,7 +28,7 @@ It Probebly contain some bugs and I hope in the future I could make it better an
 
 <p>Once you generate new password, It automatically copied to clipboard and you can just paste it in order to use it at the host site you wish.</p>
   <p>Than you can optionally add some other notes for yourself. (I personally use it for another authentication code that sometime requires to store either)</p>
- <p>Than press  "Add New Password" bottun and get an indcator:</p>
+ <p>Than press  "Add New Password" button and get an indcator:</p>
  
  ![image](https://github.com/Guy10k/Password-Manger-/assets/29884018/334cade2-9d1f-49e8-b0c1-cd376bf1ce49)
  <p>If the user you are tring to add for a spesific site is already exisst, you will be get a prompt that ask you if you want to overide this data </p>
