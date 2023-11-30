@@ -2,9 +2,10 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-import pyperclip
+
 from database import *
-from passwordGenerator import create_password
+from password_generator import create_password
+from password_manager import *
 #convention:
 # title is string
 
@@ -40,7 +41,7 @@ class AddDataFrame(ttk.Frame):
         self.pack(expand=True, fill='both')
         self.columnconfigure((0, 1, 2, 3), weight=1, uniform='a')
         self.rowconfigure((0, 1, 2, 3), weight=1, uniform='a')
-        self.generate_button = ttk.Button(self, text="Generate Password", command=self.generator_password,
+        self.generate_button = ttk.Button(self, text="Generate Password", command=self.generator_password_wrap,
                                           style='TButton')
         self.alert_label_add = ttk.Label(master=self, text="")
         self.note_label = ttk.Label(self, text="Other Details To Note:", style='TLabel')
@@ -92,7 +93,7 @@ class AddDataFrame(ttk.Frame):
         self.generate_button.grid(column=3, row=3)
 
         # add password button
-        add_button = ttk.Button(self, text="Add New Password", command=self.save_pass, style='TButton')
+        add_button = ttk.Button(self, text="Add New Password", command=self.save_pass_wrap ,style='TButton')
         add_button.grid(column=3, row=4)
 
     def clear_entries(self):
@@ -101,54 +102,47 @@ class AddDataFrame(ttk.Frame):
         self.password_entry.delete(0, END)
         self.note_entry.delete(0, END)
 
-    def generator_password(self):
+    def generator_password_wrap(self):
         self.password_entry.delete(0, END)
-        new_pass = create_password()
-        self.password_entry.insert(0, new_pass)
-        pyperclip.copy(new_pass)
+        new_pass = generator_password()
         self.alert_label_add.config(text="")
+        self.password_entry.insert(0, new_pass)
         self.alert_label_add.configure(style='green.TLabel')
         self.alert_label_add.config(text="Password Copied To Clipboard")
 
     def clear_label(self):
-        print('hi')
         self.alert_label_add.config(text="")
 
-    def save_pass(self):
+    def save_pass_wrap(self):
         host = self.web_entry.get()
         user = self.user_entry.get()
         password = self.password_entry.get()
         note = self.note_entry.get()
-        if host == "" or password == "":
+        try:
+            save_pass(host,user,password,note)
+        except InvalidDataEntries:
             self.alert_label_add.config(text="")
             self.alert_label_add.configure(style='red.TLabel')
             self.alert_label_add.config(text="Some filed Are Required")
+        except DataAlreadyExist:
+            answer = messagebox.askyesno(title="Warning",
+                                         message=f"A password for {host} whit the user: {user} is already exist,"
+                                                 f"Do you want to change it?\n")
 
 
-        else:
-            res = search_record(host, user)
-            if not res :
-                add_record(host, user, password, note)
+            if answer:
+                delete_pass(host,user)
+                save_pass(host, user, password, note)
                 self.alert_label_add.config(text="")
                 self.alert_label_add.configure(style='green.TLabel')
                 self.alert_label_add.config(text="Password Was successfully Added")
-                # window.update()
-            else:
-                answer = messagebox.askyesno(title="Warning", message=f"A password for {host} whit the user: {user} is already exist,"
-                                                                    f"Do you want to change it?\n")
-
-                print(answer)
-                if answer:
-                    delete_record(res[0][0],res[0][1])
-                    add_record(host, user, password, note)
-
-                    self.alert_label_add.config(text="")
-                    self.alert_label_add.configure(style='green.TLabel')
-                    self.alert_label_add.config(text="Password Was successfully Added")
-
-
-
+        else:
+            self.alert_label_add.config(text="")
+            self.alert_label_add.configure(style='green.TLabel')
+            self.alert_label_add.config(text="Password Was successfully Added")
+        finally:
             self.clear_entries()
+
 
 
 class SearchFrame(ttk.Frame):
@@ -166,9 +160,9 @@ class SearchFrame(ttk.Frame):
         self.rowconfigure((0, 1, 2, 3), weight=1, uniform='a')
         self.table = Table(self)
 
-        self.show_all_button = ttk.Button(self, text="Show All Passwords", command=self.show_all_Passwords,
+        self.show_all_button = ttk.Button(self, text="Show All Password", command=self.show_all_Passwords,
                                           style='TButton')
-        self.search_button = ttk.Button(self, text="Search For Passwords", command=self.search_password, style='TButton')
+        self.search_button = ttk.Button(self, text="Search For Password", command=self.search_password_wrap, style='TButton')
         self.user_search_entry = ttk.Entry(self, style='TEntry')
         self.host_search_entry = ttk.Entry(self, style='TEntry')
         self.user_search_label = ttk.Label(self, text="User Name:", style='TLabel')
@@ -232,20 +226,21 @@ class SearchFrame(ttk.Frame):
         self.update_table(show_all())
 
 
-    def search_password(self):
+    def search_password_wrap(self):
         self.alert_label_search.config(text="")
         host_to_search = self.host_search_entry.get()
         user_to_search = self.user_search_entry.get()
+        try:
+            res = search_pass(host_to_search, user_to_search)
+        except DataNoteFound:
+            self.alert_label_search.config(text="Site Not Found")
 
-        res = search_record(host_to_search, user_to_search)
-        print(res)
-        if res:
+
+        else:
 
             self.update_table(res)
 
 
-        else:
-            self.alert_label_search.config(text="Site Not Found")
 
     def update_table(self,data):
         self.clear_table()
@@ -273,7 +268,7 @@ class SearchFrame(ttk.Frame):
 
             if answer == 'yes':
 
-                delete_record(host, user )
+                delete_pass(host, user)
                 self.update_table(show_all())
 
 
