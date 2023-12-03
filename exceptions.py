@@ -7,3 +7,8 @@ class DataAlreadyExist(Exception):
 
 class DataNoteFound(Exception):
     pass
+
+class UnSupportedFileFormat(Exception):
+    pass
+
+

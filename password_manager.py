@@ -1,6 +1,7 @@
 from exceptions import *
 from database import *
 from password_generator import *
+from tkinter.filedialog import askopenfilename, askdirectory
 import pyperclip
 
 
@@ -33,3 +34,15 @@ def generator_password():
     new_pass = create_password()
     pyperclip.copy(new_pass)
     return new_pass
+
+
+def browse_for_file():
+   file_path = askopenfilename(initialdir="/",
+      title="Select File", filetypes=(("Text files","*.txt*"),("All Files","*.*")))
+   return file_path
+
+
+def browse_for_directory():
+   file_path = askdirectory(initialdir="/",
+      title="Save As")
+   return file_path
