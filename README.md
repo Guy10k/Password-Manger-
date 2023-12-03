@@ -57,3 +57,12 @@ It Probebly contain some bugs and I hope in the future I could make it better an
 <p>once you click a spesific record in the tabel you can just head over and press the "Delete Selected Record" button. Than a prompt will shows up and ask you if are you sure you want to delete this data: </p>
 
 ![image](https://github.com/Guy10k/Password-Manger-/assets/29884018/c1925ab9-486b-4250-ac14-f95b73287d11)
+
+
+<h4>4. Exporting And Importing Passwords CSV Data Files</h4>
+<p>you can load your passwords CSV file from other external source like google password manager or other password manager services.
+Or the other way, you can export the passwords stored in this app ass CSV data file in ordered to use it eleswhere.
+  
+![Screenshot 2023-12-03 at 14 58 10](https://github.com/Guy10k/Password-Manger-/assets/29884018/4bb36dd5-5dc3-45bd-8075-33fdb77789b0)
+
+</p>
